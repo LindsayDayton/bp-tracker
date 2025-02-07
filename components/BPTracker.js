@@ -10,12 +10,13 @@ export default function BPTracker() {
     diastolic: '',
     heartRate: '',
     medications: {
-      hydrochlorothiazide: { taken: false, dose: '50mg' },
-      amlodipine: { taken: false, dose: '10mg' },
-      vyvanse: { taken: false, dose: '20mg' },
-      zyrtec: { taken: false },
-      antacid: { taken: false }
-    },
+  hydrochlorothiazide: { taken: false, dose: '50mg' },
+  amlodipine: { taken: false, dose: '5mg' },
+  vyvanse: { taken: false, dose: '20mg' },
+  zyrtec: { taken: false },
+  cbd: { taken: false, dose: '15mg' },
+  trazodone: { taken: false, dose: '50mg' }
+},
     yesterday: {
       trazodone: { taken: false, dose: '50mg' },
       cbd: { taken: false, dose: '15mg' },
@@ -158,37 +159,112 @@ export default function BPTracker() {
           </div>
 
           {/* Medications Section */}
-          <div className="border border-gray-200 rounded-lg p-4">
-            <h3 className="font-medium text-gray-900 mb-3">Daily Medications</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {Object.entries(newReading.medications).map(([med, details]) => (
-                <div key={med} className="flex items-center space-x-3">
-                  <input
-                    type="checkbox"
-                    checked={details.taken}
-                    onChange={e => handleMedicationChange(med, e.target.checked)}
-                    className="h-4 w-4 text-blue-600 border-gray-300 rounded"
-                  />
-                  <span className="text-gray-700">
-                    {med.charAt(0).toUpperCase() + med.slice(1)}
-                    {details.dose && ` (${details.dose})`}
-                  </span>
-                  {details.dose && (
-                    <select
-                      value={details.dose}
-                      onChange={e => handleMedicationChange(med, e.target.value, 'dose')}
-                      className="ml-2 p-1 border border-gray-300 rounded-md text-sm"
-                      disabled={!details.taken}
-                    >
-                      <option value="20mg">20mg</option>
-                      <option value="40mg">40mg</option>
-                    </select>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
+<div className="border border-gray-200 rounded-lg p-4">
+  <h3 className="font-medium text-gray-900 mb-3">Daily Medications</h3>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {/* Hydrochlorothiazide - fixed 50mg */}
+    <div className="flex items-center space-x-3">
+      <input
+        type="checkbox"
+        checked={newReading.medications.hydrochlorothiazide.taken}
+        onChange={e => handleMedicationChange('hydrochlorothiazide', e.target.checked)}
+        className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+      />
+      <span className="text-gray-700">Hydrochlorothiazide (50mg)</span>
+    </div>
 
+    {/* Amlodipine with 5/10mg dropdown */}
+    <div className="flex items-center space-x-3">
+      <input
+        type="checkbox"
+        checked={newReading.medications.amlodipine.taken}
+        onChange={e => handleMedicationChange('amlodipine', e.target.checked)}
+        className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+      />
+      <span className="text-gray-700">Amlodipine</span>
+      <select
+        value={newReading.medications.amlodipine.dose}
+        onChange={e => handleMedicationChange('amlodipine', e.target.value, 'dose')}
+        className="ml-2 p-1 border border-gray-300 rounded-md text-sm"
+        disabled={!newReading.medications.amlodipine.taken}
+      >
+        <option value="5mg">5mg</option>
+        <option value="10mg">10mg</option>
+      </select>
+    </div>
+
+    {/* Vyvanse with 20/40mg dropdown */}
+    <div className="flex items-center space-x-3">
+      <input
+        type="checkbox"
+        checked={newReading.medications.vyvanse.taken}
+        onChange={e => handleMedicationChange('vyvanse', e.target.checked)}
+        className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+      />
+      <span className="text-gray-700">Vyvanse</span>
+      <select
+        value={newReading.medications.vyvanse.dose}
+        onChange={e => handleMedicationChange('vyvanse', e.target.value, 'dose')}
+        className="ml-2 p-1 border border-gray-300 rounded-md text-sm"
+        disabled={!newReading.medications.vyvanse.taken}
+      >
+        <option value="20mg">20mg</option>
+        <option value="40mg">40mg</option>
+      </select>
+    </div>
+
+    {/* Zyrtec */}
+    <div className="flex items-center space-x-3">
+      <input
+        type="checkbox"
+        checked={newReading.medications.zyrtec.taken}
+        onChange={e => handleMedicationChange('zyrtec', e.target.checked)}
+        className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+      />
+      <span className="text-gray-700">Zyrtec</span>
+    </div>
+
+    {/* CBD with 15/30mg dropdown */}
+    <div className="flex items-center space-x-3">
+      <input
+        type="checkbox"
+        checked={newReading.medications.cbd.taken}
+        onChange={e => handleMedicationChange('cbd', e.target.checked)}
+        className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+      />
+      <span className="text-gray-700">CBD</span>
+      <select
+        value={newReading.medications.cbd.dose}
+        onChange={e => handleMedicationChange('cbd', e.target.value, 'dose')}
+        className="ml-2 p-1 border border-gray-300 rounded-md text-sm"
+        disabled={!newReading.medications.cbd.taken}
+      >
+        <option value="15mg">15mg</option>
+        <option value="30mg">30mg</option>
+      </select>
+    </div>
+
+    {/* Trazodone with 50/100mg dropdown */}
+    <div className="flex items-center space-x-3">
+      <input
+        type="checkbox"
+        checked={newReading.medications.trazodone.taken}
+        onChange={e => handleMedicationChange('trazodone', e.target.checked)}
+        className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+      />
+      <span className="text-gray-700">Trazodone</span>
+      <select
+        value={newReading.medications.trazodone.dose}
+        onChange={e => handleMedicationChange('trazodone', e.target.value, 'dose')}
+        className="ml-2 p-1 border border-gray-300 rounded-md text-sm"
+        disabled={!newReading.medications.trazodone.taken}
+      >
+        <option value="50mg">50mg</option>
+        <option value="100mg">100mg</option>
+      </select>
+    </div>
+  </div>
+</div>
           {/* Yesterday Section */}
           <div className="border border-gray-200 rounded-lg p-4">
             <h3 className="font-medium text-gray-900 mb-3">Yesterday</h3>
