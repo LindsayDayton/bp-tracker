@@ -21,7 +21,8 @@ yesterday: {
   trazodone: { dose: '' },
   cbd: { dose: '' },
   alcohol: { amount: '' },
-  exercise: { duration: '', type: '' }
+  exercise: { duration: '', type: '' },
+  cpap: { used: false, hours: '' }
 },
     today: {
       coffee: { consumed: false, amount: '' },
@@ -49,7 +50,8 @@ yesterday: {
         trazodone: { taken: false, dose: '50mg' },
         cbd: { taken: false, dose: '15mg' },  // Fixed: added 'cbd' property name
         alcohol: { consumed: false, amount: '' },
-        exercise: { done: false, duration: '', type: '' }
+        exercise: { done: false, duration: '', type: '' },
+        cpap: {used: false, hours: '' }
       },
       today: {
         coffee: { consumed: false, amount: '' },
@@ -292,6 +294,40 @@ yesterday: {
           className="w-full p-2 border border-gray-300 rounded-md text-sm"
         />
       </div>
+            {/* CPAP Usage */}
+<div className="space-y-2">
+  <label className="flex items-center space-x-3">
+    <input
+      type="checkbox"
+      checked={newReading.yesterday.cpap.used}
+      onChange={e => setNewReading(prev => ({
+        ...prev,
+        yesterday: {
+          ...prev.yesterday,
+          cpap: { ...prev.yesterday.cpap, used: e.target.checked }
+        }
+      }))}
+      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+    />
+    <span className="text-gray-700">CPAP</span>
+  </label>
+  {newReading.yesterday.cpap.used && (
+    <input
+      type="number"
+      step="0.5"
+      placeholder="Hours used"
+      value={newReading.yesterday.cpap.hours}
+      onChange={e => setNewReading(prev => ({
+        ...prev,
+        yesterday: {
+          ...prev.yesterday,
+          cpap: { ...prev.yesterday.cpap, hours: e.target.value }
+        }
+      }))}
+      className="w-full p-2 border border-gray-300 rounded-md text-sm"
+    />
+  )}
+</div>
     </div>
   </div>
 </div>
