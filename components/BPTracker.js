@@ -45,9 +45,9 @@ export default function BPTracker() {
         zyrtec: { taken: false },
         antacid: { taken: false }
       },
-      yesterday: {
+    yesterday: {
         trazodone: { taken: false, dose: '50mg' },
-        : { taken: false, dose: '15mg' },
+        cbd: { taken: false, dose: '15mg' },  // Fixed: added 'cbd' property name
         alcohol: { consumed: false, amount: '' },
         exercise: { done: false, duration: '', type: '' }
       },
