@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
@@ -55,58 +56,70 @@ export default function BPTracker() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 space-y-6">
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid grid-cols-2 gap-4 p-4 border rounded">
-          <div>
-            <label className="block text-sm font-medium mb-1">Date & Time</label>
-            <input
-              type="datetime-local"
-              value={newReading.timestamp}
-              onChange={e => setNewReading(prev => ({ ...prev, timestamp: e.target.value }))}
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-          <div className="grid grid-cols-3 gap-2">
-            <div>
-              <label className="block text-sm font-medium mb-1">Systolic</label>
-              <input
-                type="number"
-                value={newReading.systolic}
-                onChange={e => setNewReading(prev => ({ ...prev, systolic: e.target.value }))}
-                className="w-full p-2 border rounded"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Diastolic</label>
-              <input
-                type="number"
-                value={newReading.diastolic}
-                onChange={e => setNewReading(prev => ({ ...prev, diastolic: e.target.value }))}
-                className="w-full p-2 border rounded"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Heart Rate</label>
-              <input
-                type="number"
-                value={newReading.heartRate}
-                onChange={e => setNewReading(prev => ({ ...prev, heartRate: e.target.value }))}
-                className="w-full p-2 border rounded"
-                required
-              />
-            </div>
-          </div>
+    <div className="max-w-4xl mx-auto space-y-8">
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="px-6 py-4 bg-blue-600">
+          <h2 className="text-xl font-semibold text-white">New Reading</h2>
         </div>
-
-        <div className="p-4 border rounded">
-          <h3 className="font-medium mb-3">Daily Medications</h3>
-          <div className="grid grid-cols-2 gap-4">
+        
+        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="flex items-center gap-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Date & Time
+              </label>
+              <input
+                type="datetime-local"
+                value={newReading.timestamp}
+                onChange={e => setNewReading(prev => ({ ...prev, timestamp: e.target.value }))}
+                className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+            </div>
+            <div className="grid grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Systolic
+                </label>
+                <input
+                  type="number"
+                  value={newReading.systolic}
+                  onChange={e => setNewReading(prev => ({ ...prev, systolic: e.target.value }))}
+                  className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Diastolic
+                </label>
+                <input
+                  type="number"
+                  value={newReading.diastolic}
+                  onChange={e => setNewReading(prev => ({ ...prev, diastolic: e.target.value }))}
+                  className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Heart Rate
+                </label>
+                <input
+                  type="number"
+                  value={newReading.heartRate}
+                  onChange={e => setNewReading(prev => ({ ...prev, heartRate: e.target.value }))}
+                  className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="border border-gray-200 rounded-lg p-4">
+            <h3 className="font-medium text-gray-900 mb-3">Daily Medications</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <label className="flex items-center space-x-3">
                 <input
                   type="checkbox"
                   checked={newReading.medications.hydrochlorothiazide}
@@ -117,13 +130,11 @@ export default function BPTracker() {
                       hydrochlorothiazide: e.target.checked
                     }
                   }))}
-                  className="w-4 h-4"
+                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
-                <span>Hydrochlorothiazide (50mg)</span>
+                <span className="text-gray-700">Hydrochlorothiazide (50mg)</span>
               </label>
-            </div>
-            <div>
-              <label className="flex items-center gap-2">
+              <label className="flex items-center space-x-3">
                 <input
                   type="checkbox"
                   checked={newReading.medications.amlodipine}
@@ -134,25 +145,25 @@ export default function BPTracker() {
                       amlodipine: e.target.checked
                     }
                   }))}
-                  className="w-4 h-4"
+                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
-                <span>Amlodipine (10mg)</span>
+                <span className="text-gray-700">Amlodipine (10mg)</span>
               </label>
             </div>
           </div>
-        </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
-        >
-          Save Reading
-        </button>
-      </form>
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+          >
+            Save Reading
+          </button>
+        </form>
+      </div>
 
       {readings.length > 0 && (
-        <div className="mt-8 p-4 border rounded">
-          <h3 className="font-medium mb-4">Blood Pressure History</h3>
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <h3 className="text-lg font-medium text-gray-900 mb-4">Blood Pressure History</h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={readings}>
@@ -166,9 +177,27 @@ export default function BPTracker() {
                   labelFormatter={timestamp => new Date(timestamp).toLocaleString()}
                 />
                 <Legend />
-                <Line type="monotone" dataKey="systolic" stroke="#8884d8" name="Systolic" />
-                <Line type="monotone" dataKey="diastolic" stroke="#82ca9d" name="Diastolic" />
-                <Line type="monotone" dataKey="heartRate" stroke="#ff7300" name="Heart Rate" />
+                <Line 
+                  type="monotone" 
+                  dataKey="systolic" 
+                  stroke="#2563eb" 
+                  name="Systolic"
+                  strokeWidth={2}
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey="diastolic" 
+                  stroke="#16a34a" 
+                  name="Diastolic"
+                  strokeWidth={2}
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey="heartRate" 
+                  stroke="#dc2626" 
+                  name="Heart Rate"
+                  strokeWidth={2}
+                />
               </LineChart>
             </ResponsiveContainer>
           </div>
