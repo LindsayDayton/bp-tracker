@@ -47,7 +47,7 @@ export default function BPTracker() {
       },
       yesterday: {
         trazodone: { taken: false, dose: '50mg' },
-        cbd: { taken: false, dose: '15mg' },
+        : { taken: false, dose: '15mg' },
         alcohol: { consumed: false, amount: '' },
         exercise: { done: false, duration: '', type: '' }
       },
@@ -222,46 +222,6 @@ export default function BPTracker() {
         className="h-4 w-4 text-blue-600 border-gray-300 rounded"
       />
       <span className="text-gray-700">Zyrtec</span>
-    </div>
-
-    {/* CBD with 15/30mg dropdown */}
-    <div className="flex items-center space-x-3">
-      <input
-        type="checkbox"
-        checked={newReading.medications.cbd.taken}
-        onChange={e => handleMedicationChange('cbd', e.target.checked)}
-        className="h-4 w-4 text-blue-600 border-gray-300 rounded"
-      />
-      <span className="text-gray-700">CBD</span>
-      <select
-        value={newReading.medications.cbd.dose}
-        onChange={e => handleMedicationChange('cbd', e.target.value, 'dose')}
-        className="ml-2 p-1 border border-gray-300 rounded-md text-sm"
-        disabled={!newReading.medications.cbd.taken}
-      >
-        <option value="15mg">15mg</option>
-        <option value="30mg">30mg</option>
-      </select>
-    </div>
-
-    {/* Trazodone with 50/100mg dropdown */}
-    <div className="flex items-center space-x-3">
-      <input
-        type="checkbox"
-        checked={newReading.medications.trazodone.taken}
-        onChange={e => handleMedicationChange('trazodone', e.target.checked)}
-        className="h-4 w-4 text-blue-600 border-gray-300 rounded"
-      />
-      <span className="text-gray-700">Trazodone</span>
-      <select
-        value={newReading.medications.trazodone.dose}
-        onChange={e => handleMedicationChange('trazodone', e.target.value, 'dose')}
-        className="ml-2 p-1 border border-gray-300 rounded-md text-sm"
-        disabled={!newReading.medications.trazodone.taken}
-      >
-        <option value="50mg">50mg</option>
-        <option value="100mg">100mg</option>
-      </select>
     </div>
   </div>
 </div>
