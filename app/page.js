@@ -1,4 +1,7 @@
-import BPTracker from '../components/BPTracker'
+import dynamic from 'next/dynamic'
+
+// Dynamically import the BPTracker component with no SSR
+const BPTracker = dynamic(() => import('../components/BPTracker'), { ssr: false })
 
 export default function Home() {
   return (
