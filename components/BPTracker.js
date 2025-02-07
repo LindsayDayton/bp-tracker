@@ -5,7 +5,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 export default function BPTracker() {
   const [readings, setReadings] = useState([]);
   const [newReading, setNewReading] = useState({
-    timestamp: new Date().toISOString().slice(0, 16),
+ timestamp: new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16),
     systolic: '',
     diastolic: '',
     heartRate: '',
@@ -34,7 +34,7 @@ yesterday: {
     e.preventDefault();
     setReadings(prev => [...prev, { ...newReading, id: Date.now() }]);
     setNewReading({
-      timestamp: new Date().toISOString().slice(0, 16),
+ timestamp: new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16),
       systolic: '',
       diastolic: '',
       heartRate: '',
