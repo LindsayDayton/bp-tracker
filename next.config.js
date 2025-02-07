@@ -1,6 +1,6 @@
-module.exports = {
-  output: 'standalone',
-  images: {
-    unoptimized: true
-  }
+const nextConfig = {
+  reactStrictMode: true,
+  output: 'export'
 }
+
+module.exports = nextConfig
